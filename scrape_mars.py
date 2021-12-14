@@ -5,6 +5,7 @@ import pymongo
 import pandas as pd
 import requests
 from flask import Flask, render_template
+import time
 
 conn = 'mongodb://localhost:27017'
 client = pymongo.MongoClient(conn)
@@ -56,13 +57,14 @@ def scrape():
 #mars hemispheres
     hemisphere_image_urls = []
     url1 = ('https://marshemispheres.com/cerberus.html')
-    browser.visit(url)
+    browser.visit(url1)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
-    cerberus_img = soup.find('a', target='_blank')
+    cerberus_img = soup.find('div', class_='downloads')
+    cerberus_img = soup.find('a', href='images/full.jpg')
     cerberus_img = cerberus_img.attrs['href']
-    cerberus_img = url1 + cerberus_img
-    cereberus_object = soup.find('div', class_='container')
+    cerberus_img = 'https://marshemispheres.com/' + cerberus_img
+    cereberus_object = soup.find('div', class_='cover')
     cerberus_title = cereberus_object.find('h2').get_text()
     cerb = {'title':cerberus_title,'img_url':cerberus_img}
     hemisphere_image_urls.append(cerb)
@@ -71,9 +73,10 @@ def scrape():
     browser.visit(url2)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
-    schiaparelli_img = soup.find('a', target='_blank')
+    schiaparelli_img = soup.find('div', class_='downloads')
+    schiaparelli_img = soup.find('a', href='images/schiaparelli_enhanced-full.jpg')
     schiaparelli_img = schiaparelli_img.attrs['href']
-    schiaparelli_img = url2 + schiaparelli_img
+    schiaparelli_img = 'https://marshemispheres.com/' + schiaparelli_img
     schiaparelli_object = soup.find('div', class_='container')
     schiaparelli_title = schiaparelli_object.find('h2').get_text()
     schia = {'title':schiaparelli_title,'img_url':schiaparelli_img}
@@ -83,9 +86,10 @@ def scrape():
     browser.visit(url3)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
-    syrtis_img = soup.find('a', target='_blank')
+    syrtis_img = soup.find('div', class_='downloads')
+    syrtis_img = soup.find('a', href='images/syrtis_major_enhanced-full.jpg')
     syrtis_img = syrtis_img.attrs['href']
-    syrtis_img = url3 + syrtis_img
+    syrtis_img = 'https://marshemispheres.com/' + syrtis_img
     syrtis_title = soup.find('h2', class_='title').get_text()
     syrtis = {'title':syrtis_title,'img_url':syrtis_img}
     hemisphere_image_urls.append(syrtis)
@@ -94,16 +98,20 @@ def scrape():
     browser.visit(url4)
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
-    valles_img = soup.find('a', target='_blank')
+    valles_img = soup.find('div', class_='downloads')
+    valles_img = soup.find('a', href='images/valles_marineris_enhanced-full.jpg')
     valles_img = valles_img.attrs['href']
-    valles_img = url4 + valles_img
+    valles_img = 'https://marshemispheres.com/' + valles_img
     valles_title = soup.find('h2', class_='title').get_text()
     valles = {'title':valles_title,'img_url':valles_img}
     hemisphere_image_urls.append(valles)
 
-    mars_dictionary["hemisphere_image_urls"]
+    mars_dictionary["hemisphere_image_urls"] = hemisphere_image_urls
 
     # Quit the browser
     browser.quit()
+    print(mars_dictionary)
+    return mars_dictionary
 
     # mars.insert_one(mars_dictionary)
+scrape()

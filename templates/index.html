@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Junki goes to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="jumbotron text-center">
+            <h1>Mission to Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+        </div>
+
+        <div class="row" id="mars_news">
+            <h3><strong>Latest Mars News</strong></h3>
+            <h4 class="heading">{{ mars_dictionary.news_title }}</h4>
+            <p>{{ mars_dictionary.news_p }}</p>
+        </div>
+
+        <div class="row" id="mars_image">
+            <div class="col-md-7">
+                <h3><strong>Featured Mars Image</strong></h3>
+                <img src="{{ mars_dictionary.featured_img_url }}" alt="Mars image">
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <h5><strong>Mars Facts</strong></h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            {{ mars_dictionary.mars_table | safe }}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="mars_hemi">
+            <h3 style="text-align:center;"><strong>Mars Hemispheres</strong></h3>
+            <hr>
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][0]["img_url"] }}' alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][0]["title"] }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <!-- <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][1]["img_url"] }}' alt="Card image cap"> -->
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][1]["title"] }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <!-- <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][2]["img_url"] }}' alt="Card image cap"> -->
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][2]["title"] }}</strong></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <!-- <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][3]["img_url"] }}' alt="Card image cap"> -->
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][3]["title"] }}</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+</body>
+
+</html>
