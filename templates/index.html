@@ -43,38 +43,18 @@
         <div class="row" id="mars_hemi">
             <h3 style="text-align:center;"><strong>Mars Hemispheres</strong></h3>
             <hr>
-            <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][0]["img_url"] }}' alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][0]["title"] }}</strong></p>
+
+            {% for list in mars_dictionary.hemisphere_image_urls %}
+                <div class="col-md-3">
+                    <div class="card" style="width: 20rem;">
+                        <div class="card-body">
+                            <img src="{{ list.img_url }}" alt="img_url.jpg" width = 100% class="center"/>
+                            <h4 class="card-title">{{ list.title }}</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <!-- <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][1]["img_url"] }}' alt="Card image cap"> -->
-                    <div class="card-body">
-                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][1]["title"] }}</strong></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <!-- <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][2]["img_url"] }}' alt="Card image cap"> -->
-                    <div class="card-body">
-                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][2]["title"] }}</strong></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
-                    <!-- <img class="card-img-top" src='{{ mars_dictionary["hemisphere_image_urls"][3]["img_url"] }}' alt="Card image cap"> -->
-                    <div class="card-body">
-                        <p class="card-text"><strong>{{ mars_dictionary["hemisphere_image_urls"][3]["title"] }}</strong></p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+
         </div>
         
 
